@@ -1,0 +1,13 @@
+CI
+
+cd /opt/docker
+docker build -t tomcat_demo .
+docker tag tomcat_demo  veejee2331/tomcat_demo
+docker push veejee2331/tomcat_demo
+docker rmi tomcat_demo veejee2331/tomcat_demo
+
+
+CD
+
+ansible-playbook -i /opt/kuber/hosts /opt/kuber/deployment.yml; 
+ansible-playbook -i /opt/kuber/hosts /opt/kuber/service.yaml; 
