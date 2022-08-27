@@ -1,0 +1,19 @@
+---
+- hosts: ansible-server
+  become: true
+
+  tasks:
+  - name: create docker image using war file
+    command: docker build -t tomcat-image:latest .
+    args:
+      chdir: /opt/kuber
+
+  - name: create tag to image
+    command: docker tag tomcat-image veejee2331/tomcat-image
+
+  - name: push image on to dockerhub
+    command: docker push veejee2331/tomcat-image
+
+  - name: remove docker images form ansible server
+    command: docker rmi tomcat-image:latest veejee2331/tomcat-image
+    ignore_errors: yes
