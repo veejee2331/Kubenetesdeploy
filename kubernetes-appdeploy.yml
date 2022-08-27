@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: kube-ansible
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kube-ansible
+  template:
+    metadata:
+      labels:
+        app: kube-ansible
+    spec:
+      containers:
+      - name: kube-ansible
+        image: veejee2331/tomcat_demo
+        ports:
+        - containerPort: 80
